@@ -1,0 +1,194 @@
+/* =========================================================
+   Modern Pokédex Layout
+   ========================================================= */
+
+/* ---------- Global ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, sans-serif;
+  background: #eef4ff;
+  color: #1e293b;                 /* slate-800 */
+}
+
+/* ---------- Page wrapper ---------- */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+}
+
+.container header h1 {
+  margin: 0 0 2.5rem;
+  text-align: center;
+  font-size: clamp(1.8rem, 2.6vw + 1rem, 3rem);
+  font-weight: 800;
+  background: linear-gradient(90deg, #3b82f6, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.4px;
+}
+
+/* ---------- Search bar ---------- */
+.pokemon-search {
+  display: flex;
+  justify-content: center;
+  margin: 0 0 2.5rem;          /* space under header */
+}
+
+.pokemon-search input {
+  width: min(480px, 90%);      /* shrink nicely on small screens */
+  padding: 0.75rem 1.05rem;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #1e293b;              /* slate-800 */
+  background: #ffffffc9;       /* glassy white */
+  backdrop-filter: blur(12px);
+  border: 2px solid #c7d2fe;   /* indigo-200 */
+  border-radius: 999px;
+  outline: none;
+  transition:
+    border-color 0.25s ease,
+    box-shadow   0.25s ease,
+    transform    0.25s ease;
+}
+
+.pokemon-search input::placeholder {
+  color: #94a3b8;              /* slate-400 */
+  letter-spacing: 0.3px;
+}
+
+.pokemon-search input:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.pokemon-search input:focus {
+  border-color: #6366f1;       /* indigo-500 */
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.25);
+}
+
+/* ---------- Card grid ---------- */
+.container ul {
+  /* auto-fill makes as many columns as fit, min 220 px  */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.75rem;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- Card ---------- */
+.pokemon-card {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1.25rem;
+  background: #ffffffc9;          /* glassy white */
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+.pokemon-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.12);
+}
+
+/* ---------- Sprite ---------- */
+.pokemon-card figure {
+  margin: 0;
+  height: 170px;                 /* keeps card heights even */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pokemon-image {
+  max-width: 130px;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.35s ease;
+}
+
+.pokemon-card:hover .pokemon-image {
+  transform: translateY(-4px) rotate(-2deg);
+}
+
+/* ---------- Name ---------- */
+.pokemon-name {
+  margin: 0;
+  padding: 0.5rem 0;
+  text-align: center;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+/* ---------- Type badge row ---------- */
+.pokemon-info[pokemon-highlight],   /* your original attribute */
+.type-list                          /* future-proof class name */
+{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0 0 1rem;
+}
+
+.pokemon-info[pokemon-highlight] p,
+.type-list span {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: #4338ca;                 /* indigo-700 */
+  background: #e0e7ff;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+}
+
+/* ---------- Triple-stat grids ---------- */
+.grid-three-cols,
+.greed-three-cols {                /* typo support */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.35rem;
+  padding: 0 1rem 1rem;
+}
+
+.pokemon-info {
+  background: #f8fafc;
+  border-radius: 0.65rem;
+  padding: 0.45rem 0.5rem;
+  text-align: center;
+  font-size: 0.78rem;
+  line-height: 1.25;
+  font-weight: 600;
+  color: #334155;                 /* slate-700 */
+}
+
+.pokemon-info span {
+  display: block;
+  margin-bottom: 0.18rem;
+  font-weight: 700;
+  font-size: 0.72rem;
+  color: #64748b;                 /* slate-500 */
+}
+
+/* ---------- Small-screen tweaks ---------- */
+@media (max-width: 480px) {
+  .container ul {
+    gap: 1.25rem;
+  }
+  .pokemon-card figure {
+    height: 150px;
+  }
+}
